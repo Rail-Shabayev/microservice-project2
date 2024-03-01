@@ -1,6 +1,8 @@
 package org.rail.project.controller;
 
 
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -10,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.rail.project.dto.ProductDto;
+import org.rail.project.exception.ProductNotFoundException;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
@@ -47,7 +50,7 @@ public interface ProductControllerApi {
                     content = @Content(schema = @Schema(example = "{Product not found with name: laptop}"))),
     })
     ProductDto getProductById(@Parameter(required = true, description = "Name of the object that needs to be deleted")
-                              @PathVariable("id") Long id);
+                              @PathVariable("id") Long id) throws ProductNotFoundException;
 
     @Operation(summary = "Add a new product to factory")
     @ApiResponses(value = {
@@ -83,7 +86,7 @@ public interface ProductControllerApi {
     String putProduct(@Parameter(required = true, description = "Object to be updated")
                       @RequestBody ProductDto productDto,
                       @Parameter(required = true, description = "Name of the object that needs to be updated")
-                      @PathVariable("id") Long id);
+                      @PathVariable("id") Long id) throws ProductNotFoundException;
 
     @Operation(summary = "PATCH a product in factory")
     @ApiResponses(value = {
@@ -101,10 +104,10 @@ public interface ProductControllerApi {
                     responseCode = "404",
                     content = @Content(schema = @Schema(example = "{Product not found with name: laptop}")))
     })
-    String patchProduct(@Parameter(required = true, description = "Object to be updated")
-                        @RequestBody ProductDto productDto,
+    String patchProduct(@Parameter(required = true, description = "jsonPatch method containing list of operations to be applied to entity ")
+                        @RequestBody JsonPatch jsonPatch,
                         @Parameter(required = true, description = "Name of the object that needs to be updated")
-                        @PathVariable("id") Long id);
+                        @PathVariable("id") Long id) throws ProductNotFoundException, JsonPatchException;
 
     @Operation(summary = "Delete a product from factory")
     @ApiResponses(value = {
@@ -123,5 +126,5 @@ public interface ProductControllerApi {
                     content = @Content(schema = @Schema(example = "{Product not found with name: laptop}"))),
     })
     String deleteProduct(@Parameter(required = true, description = "Name of the object that needs to be deleted")
-                         @PathVariable("id") Long id);
+                         @PathVariable("id") Long id) throws ProductNotFoundException;
 }
