@@ -88,7 +88,11 @@ public interface ProductControllerApi {
                       @Parameter(required = true, description = "Name of the object that needs to be updated")
                       @PathVariable("id") Long id) throws ProductNotFoundException;
 
-    @Operation(summary = "PATCH a product in factory")
+    @Operation(summary = "PATCH a product in factory", requestBody = @RequestBody(
+            required = true, content = @Content(
+            schema = @Schema(
+                    example = "{\"op\":\"test\",\"path\":\"telephone\"," +
+                            "\"value\":\"001-555-5678\"}"))))
     @ApiResponses(value = {
             @ApiResponse(
                     description = "Product created",
@@ -104,10 +108,10 @@ public interface ProductControllerApi {
                     responseCode = "404",
                     content = @Content(schema = @Schema(example = "{Product not found with name: laptop}")))
     })
-    String patchProduct(@Parameter(required = true, description = "jsonPatch method containing list of operations to be applied to entity ")
-                        @RequestBody JsonPatch jsonPatch,
-                        @Parameter(required = true, description = "Name of the object that needs to be updated")
-                        @PathVariable("id") Long id) throws ProductNotFoundException, JsonPatchException;
+    String patchProduct(@Parameter(required = true, description = "Name of the object that needs to be updated")
+                        @PathVariable("id") Long id,
+                        @Parameter(required = true, description = "jsonPatch method containing list of operations to be applied to entity ")
+                        @RequestBody JsonPatch jsonPatch) throws ProductNotFoundException, JsonPatchException;
 
     @Operation(summary = "Delete a product from factory")
     @ApiResponses(value = {

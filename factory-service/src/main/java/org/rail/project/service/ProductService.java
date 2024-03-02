@@ -45,6 +45,7 @@ public class ProductService {
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
         Product mappedToEntity = mapper.mapToEntity(productDto);
         mappedToEntity.setDateCreated(product.getDateCreated());
+        mappedToEntity.setId(product.getId());
         productRepository.save(mappedToEntity);
         return "product updated";
     }
@@ -67,6 +68,7 @@ public class ProductService {
     }
 
     private Product applyPatchToProduct(JsonPatch jsonPatch, Product product) throws JsonPatchException, JsonProcessingException {
+        objectMapper.findAndRegisterModules();
         JsonNode patched = jsonPatch.apply(objectMapper.convertValue(product, JsonNode.class));
         return objectMapper.treeToValue(patched, Product.class);
     }

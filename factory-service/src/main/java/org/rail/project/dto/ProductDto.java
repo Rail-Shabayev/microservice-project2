@@ -9,12 +9,15 @@ import java.time.LocalDate;
 //how to eliminate the need to use
 // builder with only one constructor args parameter
 // I've seen in one video about that
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Data
 public class ProductDto {
-    Status status;
-    LocalDate deliveryDate;
-    LocalDate dateCreated;
-    Long shipperId;
+    private Status status;
+    private LocalDate deliveryDate;
+
+    @Setter(AccessLevel.NONE)
+    private LocalDate dateCreated;
+    private Long shipperId;
 }

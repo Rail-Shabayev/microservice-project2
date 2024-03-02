@@ -45,7 +45,7 @@ public class ProductController implements ProductControllerApi {
     @Override
     @PatchMapping(value = "/{id}", consumes = "application/json-patch+json")
     @ResponseStatus(HttpStatus.CREATED)
-    public String patchProduct(@RequestBody JsonPatch jsonPatch, @PathVariable Long id) throws ProductNotFoundException {
+    public String patchProduct(@PathVariable Long id, @RequestBody JsonPatch jsonPatch) throws ProductNotFoundException {
         return productService.patchProduct(id, jsonPatch);
     }
 

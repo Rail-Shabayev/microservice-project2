@@ -19,9 +19,9 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotBlank
+
     private Status status;
-    @NotBlank
+
     private LocalDate deliveryDate;
     @CreatedDate
     private LocalDate dateCreated;
