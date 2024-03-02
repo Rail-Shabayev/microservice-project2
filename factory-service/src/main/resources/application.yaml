@@ -1,4 +1,5 @@
 spring:
+
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     password: password
@@ -10,3 +11,6 @@ spring:
     compose:
       file: /home/rail/IdeaProjects/secondMicroservices/factory-service/docker/compose.yaml
       enabled: false
+springdoc:
+  swagger-ui:
+    url:
