@@ -1,9 +1,9 @@
 package org.rail.project.dto;
 
 import lombok.*;
-import org.rail.project.model.Shipper;
-import org.rail.project.model.Status;
+import org.rail.project.model.Manufacturer;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 //how to eliminate the need to use
@@ -14,10 +14,10 @@ import java.time.LocalDate;
 @Builder
 @Data
 public class ProductDto {
-    private Status status;
-    private LocalDate deliveryDate;
+    private String name;
+    private BigDecimal price;
 
     @Setter(AccessLevel.NONE)
     private LocalDate dateCreated;
-    private Shipper shipper;
+    private Manufacturer manufacturer;
 }

@@ -9,19 +9,19 @@ public class ProductMapper {
 
     public Product mapToEntity(ProductDto productDto) {
         return Product.builder()
-                .deliveryDate(productDto.getDeliveryDate())
-                .status(productDto.getStatus())
+                .price(productDto.getPrice())
+                .name(productDto.getName())
                 .dateCreated(productDto.getDateCreated())
-                .shipper(productDto.getShipper())
+                .manufacturer(productDto.getManufacturer())
                 .build();
     }
 
     public ProductDto mapToDto(Product product) {
         return ProductDto.builder()
-                .deliveryDate(product.getDeliveryDate())
-                .status(product.getStatus())
+                .price(product.getPrice())
+                .name(product.getName())
                 .dateCreated(product.getDateCreated())
-                .shipper(product.getShipper())
+                .manufacturer(product.getManufacturer())
                 .build();
     }
 

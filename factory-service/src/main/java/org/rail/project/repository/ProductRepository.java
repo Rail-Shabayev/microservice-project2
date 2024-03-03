@@ -9,11 +9,11 @@ import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Override
-    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = "shipper")
+    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = "manufacturer")
     List<Product> findAll();
 
     @Override
-    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = "shipper")
+    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = "manufacturer")
     Optional<Product> findById(Long aLong);
 
 }

@@ -18,7 +18,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 //@NamedEntityGraph(name = "shipper-graph", attributeNodes = @NamedAttributeNode("products"))
-public class Shipper {
+public class Manufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -32,7 +32,7 @@ public class Shipper {
     private String email;
 
     @OneToMany(
-            mappedBy = "shipper",
+            mappedBy = "manufacturer",
             cascade = CascadeType.ALL
     )
     private List<Product> products;
