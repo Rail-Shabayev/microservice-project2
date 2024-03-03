@@ -6,7 +6,6 @@ import com.google.i18n.phonenumbers.Phonenumber;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import static com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL;
 import static com.google.i18n.phonenumbers.PhoneNumberUtil.getInstance;
 
 public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, String> {
@@ -15,7 +14,7 @@ public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, St
         PhoneNumberUtil numberUtil = getInstance();
         Phonenumber.PhoneNumber parsedPhoneNumber;
         try {
-            parsedPhoneNumber = numberUtil.parse(phoneNumber, INTERNATIONAL.name());
+            parsedPhoneNumber = numberUtil.parse(phoneNumber, "US");
         } catch (NumberParseException e) {
             throw new RuntimeException("phone Number: " + e);
         }
