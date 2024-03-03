@@ -1,4 +1,4 @@
-package org.rail.project.model;
+package org.project.model;
 
 public enum Status {
     SEND,

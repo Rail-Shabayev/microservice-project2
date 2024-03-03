@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    password: password
+    username: postgres
+  jpa:
+    hibernate.ddl-auto: create-drop
+    show-sql: true
+  docker:
+    compose:
+      file: /home/rail/IdeaProjects/secondMicroservices/factory-service/docker/compose.yaml
+      enabled: false
