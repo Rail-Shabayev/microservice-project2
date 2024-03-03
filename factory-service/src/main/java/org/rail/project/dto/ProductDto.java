@@ -1,7 +1,7 @@
 package org.rail.project.dto;
 
-import jakarta.validation.constraints.Positive;
 import lombok.*;
+import org.rail.project.model.Shipper;
 import org.rail.project.model.Status;
 
 import java.time.LocalDate;
@@ -19,5 +19,5 @@ public class ProductDto {
 
     @Setter(AccessLevel.NONE)
     private LocalDate dateCreated;
-    private Long shipperId;
+    private Shipper shipper;
 }

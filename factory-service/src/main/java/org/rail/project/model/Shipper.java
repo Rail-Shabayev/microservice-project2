@@ -1,9 +1,6 @@
 package org.rail.project.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -13,15 +10,19 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.rail.project.annotation.PhoneNumber;
 
+import java.util.List;
+
 @Entity
 @Data
 @RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
+//@NamedEntityGraph(name = "shipper-graph", attributeNodes = @NamedAttributeNode("products"))
 public class Shipper {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
     @NotBlank
     @Size(min = 2)
     private String shipperName;
@@ -30,6 +31,11 @@ public class Shipper {
     @Email
     private String email;
 
+    @OneToMany(
+            mappedBy = "shipper",
+            cascade = CascadeType.ALL
+    )
+    private List<Product> products;
 
 }
 

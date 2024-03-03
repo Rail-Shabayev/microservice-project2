@@ -1,7 +1,8 @@
 package org.rail.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,8 +26,12 @@ public class Product {
     private LocalDate deliveryDate;
     @CreatedDate
     private LocalDate dateCreated;
-    @ManyToOne(targetEntity = Shipper.class)
+
+    @NotNull
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE) //changed cascadeType from All to merge
     @JoinColumn(name = "shipper_id")
-    private Long shipperId;
+    private Shipper shipper;
+//    https://habr.com/ru/articles/714704/
 
 }

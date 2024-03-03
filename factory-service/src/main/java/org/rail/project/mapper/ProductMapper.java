@@ -12,7 +12,7 @@ public class ProductMapper {
                 .deliveryDate(productDto.getDeliveryDate())
                 .status(productDto.getStatus())
                 .dateCreated(productDto.getDateCreated())
-                .shipperId(productDto.getShipperId())
+                .shipper(productDto.getShipper())
                 .build();
     }
 
@@ -21,7 +21,7 @@ public class ProductMapper {
                 .deliveryDate(product.getDeliveryDate())
                 .status(product.getStatus())
                 .dateCreated(product.getDateCreated())
-                .shipperId(product.getShipperId())
+                .shipper(product.getShipper())
                 .build();
     }
 
