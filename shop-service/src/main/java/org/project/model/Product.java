@@ -1,4 +1,4 @@
-package org.rail.project.model;
+package org.project.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -13,6 +13,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @RequiredArgsConstructor
@@ -27,7 +28,7 @@ public class Product {
     @NotBlank
     private String name;
 
-    @NotNull
+    @NotBlank
     @Min(value = 1)
     private BigDecimal price;
     @CreatedDate
@@ -38,4 +39,7 @@ public class Product {
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 //    https://habr.com/ru/articles/714704/
+
+    @OneToMany(mappedBy = "product")
+    private Set<OrderDetails> orderDetails;
 }
