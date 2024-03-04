@@ -1,5 +1,5 @@
-spring:
 
+spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     password: password
@@ -11,3 +11,11 @@ spring:
     compose:
       file: /home/rail/IdeaProjects/secondMicroservices/factory-service/docker/compose.yaml
       enabled: false
+  application:
+    name: factory-service
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8082
