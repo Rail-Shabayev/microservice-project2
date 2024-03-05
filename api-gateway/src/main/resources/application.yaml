@@ -2,6 +2,13 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+springdoc:
+  swagger-ui:
+    urls:
+      - name: factory
+        url: /v3/api-docs/factory
+      - name: shop
+        url: /v3/api-docs/shop
 spring:
   application:
     name: api-gateway
@@ -12,7 +19,17 @@ spring:
           uri: lb://factory-service
           predicates:
             - Path=/api/product
+          filters:
+            - RewritePath=/api/product/(?<path>.*), /$\{path}
         - id: shop-service
           uri: lb://shop-service
           predicates:
             - Path=/api/order
+          filters:
+            - RewritePath=/api/order/(?<path>.*), /$\{path}
+        - id: openapi
+          uri: http://localhost:8080
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
