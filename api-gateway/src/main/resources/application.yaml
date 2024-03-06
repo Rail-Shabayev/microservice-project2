@@ -14,19 +14,22 @@ spring:
     name: api-gateway
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
       routes:
         - id: factory-service
           uri: lb://factory-service
           predicates:
-            - Path=/api/product
+            - Path=/factory/**
           filters:
-            - RewritePath=/api/product/(?<path>.*), /$\{path}
+            - RewritePath=/factory/(?<path>.*), /$\{path}
         - id: shop-service
           uri: lb://shop-service
           predicates:
-            - Path=/api/order
+            - Path=/shop/**
           filters:
-            - RewritePath=/api/order/(?<path>.*), /$\{path}
+            - RewritePath=/shop/(?<path>.*), /$\{path}
         - id: openapi
           uri: http://localhost:8080
           predicates:
