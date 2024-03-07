@@ -2,13 +2,13 @@ package org.rail.project.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
-import com.github.fge.jsonpatch.JsonPatchException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.rail.project.dto.ProductDto;
@@ -39,7 +39,7 @@ class ProductServiceTest {
     private ProductMapper productMapper;
 
     private Product product;
-
+    @InjectMocks
     private ProductService productService;
     private ProductDto productDto;
 
@@ -50,7 +50,7 @@ class ProductServiceTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        productService = new ProductService(productRepository, productMapper);
+//        productService = new ProductService(productRepository, productMapper);
         productDto = new ProductDto("rail", new BigDecimal(23), LocalDate.now(),
                 new Manufacturer(1L, "man", null, null, null));
         product = new Product(1L, "rail",
