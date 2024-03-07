@@ -58,11 +58,11 @@ public class OrderService {
      * @param id name of the {@link Order} to be changed
      * @param orderDto {@link OrderDto} object that was passed by the user
      * @return status of method work
-     * @throws OrderNotFoundException if {@link Order} with provided name is not found in database
+     * @throws OrderNotFoundException if {@link Order} with provided id is not found in database
      */
     public String putOrder(Long id, OrderDto orderDto) throws OrderNotFoundException {
         Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new OrderNotFoundException("Order not found with name: " + id));
+                .orElseThrow(() -> new OrderNotFoundException("Order not found with id: " + id));
         Order mappedToEntity = mapper.mapToEntity(orderDto);
         mappedToEntity.setDeliveryDate(LocalDate.now());
         mappedToEntity.setDateCreated(order.getDateCreated());
@@ -74,11 +74,11 @@ public class OrderService {
      * deletes {@link Order} from the database
      * @param id name of the {@link Order} that user wants to delete
      * @return string with operation work status
-     * @throws OrderNotFoundException if {@link Order} with provided name is not found in database
+     * @throws OrderNotFoundException if {@link Order} with provided id is not found in database
      */
     public String deleteOrder(Long id) throws OrderNotFoundException {
         Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new OrderNotFoundException("Order not found with name: " + id));
+                .orElseThrow(() -> new OrderNotFoundException("Order not found with id: " + id));
         orderRepository.delete(order);
         return "order deleted";
     }
