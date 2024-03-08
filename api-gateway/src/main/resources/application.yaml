@@ -9,6 +9,8 @@ springdoc:
         url: /v3/api-docs/factory
       - name: shop
         url: /v3/api-docs/shop
+      - name: users
+        url: /v3/api-docs/users
 spring:
   application:
     name: api-gateway
@@ -24,12 +26,21 @@ spring:
             - Path=/factory/**
           filters:
             - RewritePath=/factory/(?<path>.*), /$\{path}
+
         - id: shop-service
           uri: lb://shop-service
           predicates:
             - Path=/shop/**
           filters:
             - RewritePath=/shop/(?<path>.*), /$\{path}
+
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+          filters:
+            - RewritePath=/user/(?<path>.*), /$\{path}
+
         - id: openapi
           uri: http://localhost:8080
           predicates:
