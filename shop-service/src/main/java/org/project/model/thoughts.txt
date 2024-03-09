@@ -1,0 +1,11 @@
+when assigning tables to microservices  I made
+a mistake joining them together even though they were in separate services.
+When reading articles from internet I learnt that this is a bad practice
+I would better off make few entities per service and tie them together through
+RestClient
+All I left with is either copying classes from each service to one another or
+making cyclical dependencies.
+Right now my model structure in shop-service is not working except my
+IntelJ idea generated diagram that is correct
+But in the end(...) I refreshed knowledge on how to make
+ Many-To-Many, One-To-Many relationships and to solve N+1 problem

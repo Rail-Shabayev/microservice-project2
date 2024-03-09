@@ -32,6 +32,7 @@ public class Product {
     private BigDecimal price;
     @CreatedDate
     private LocalDate dateCreated;
+
     @NotNull
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE) //changed cascadeType from All to merge

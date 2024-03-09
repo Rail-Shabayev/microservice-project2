@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
-//@NamedEntityGraph(name = "shipper-graph", attributeNodes = @NamedAttributeNode("products"))
+@NamedEntityGraph(name = "shipper-graph", attributeNodes = @NamedAttributeNode("products"))
 public class Manufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

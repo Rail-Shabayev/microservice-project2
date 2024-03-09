@@ -3,7 +3,6 @@ package org.rail;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import org.springdoc.core.models.GroupedOpenApi;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteDefinition;
@@ -16,15 +15,20 @@ import java.util.List;
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(version = "2.0", title = "super title for my open api spec"))
 public class ApiGatewayApp {
+
+    private final RouteDefinitionLocator locator;
+
+    public ApiGatewayApp(RouteDefinitionLocator locator) {
+        this.locator = locator;
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(ApiGatewayApp.class);
     }
 
-    @Autowired
-    RouteDefinitionLocator locator;
-
     /**
      * this bean responsible for creating open api groupings
+     *
      * @return list of open api groups from route definitions mapped inside application.yaml
      */
     @Bean

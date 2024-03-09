@@ -14,7 +14,6 @@ import static org.springframework.http.HttpStatus.CREATED;
 /**
  * Controller class that holds CRUD operations for product entity in /api/product endpoint
  * <p>
- *
  */
 @RestController
 @RequestMapping("/api/order")
@@ -27,6 +26,7 @@ public class OrderController extends OrderApi {
 
     /**
      * GET method for /api/Order endpoint
+     *
      * @return list of found {@link OrderDto} objects
      */
     @GetMapping
@@ -36,6 +36,7 @@ public class OrderController extends OrderApi {
 
     /**
      * POST method for /api/order endpoint
+     *
      * @param orderDto {@link OrderDto} object passed by a user
      * @return string with operation work status
      */
@@ -47,8 +48,9 @@ public class OrderController extends OrderApi {
 
     /**
      * PUT method for /api/order/ endpoint
+     *
      * @param orderDto orderDto {@link OrderDto} object passed by a user
-     * @param id id of the {@link Order} that user wants to update
+     * @param id       id of the {@link Order} that user wants to update
      * @return string with operation work status
      * @throws OrderNotFoundException if {@link Order} with provided id is not found in database
      */
@@ -60,6 +62,7 @@ public class OrderController extends OrderApi {
 
     /**
      * DELETE method for /api/order/ endpoint
+     *
      * @param id name of the {@link Order} that user wants to delete
      * @return string with operation work status
      * @throws OrderNotFoundException if {@link Order} with provided name is not found in database

@@ -31,6 +31,7 @@ public class GlobalExceptionHandler {
 
     /**
      * handles {@link ConstraintViolationException} and prints it to the user
+     *
      * @param exception {@link ConstraintViolationException} object that was intercepted
      * @return {@link ResponseEntity} object with error cause and {@link org.springframework.http.HttpStatus}
      */
@@ -46,6 +47,7 @@ public class GlobalExceptionHandler {
     /**
      * handles {@link InvalidFormatException} and prints it to the user
      * if exception was type of {@link Status} class it print specific message for it
+     *
      * @param exception {@link InvalidFormatException} object that was intercepted
      * @return {@link ResponseEntity} object with error cause and {@link org.springframework.http.HttpStatus}
      */
@@ -62,6 +64,7 @@ public class GlobalExceptionHandler {
 
     /**
      * handles {@link OrderNotFoundException} and prints it to the user
+     *
      * @param exception {@link OrderNotFoundException} object that was intercepted
      * @return {@link ResponseEntity} object with error cause and {@link org.springframework.http.HttpStatus}
      */
@@ -73,6 +76,7 @@ public class GlobalExceptionHandler {
 
     /**
      * handles unknown exception that was thrown runtime
+     *
      * @param exception {@link RuntimeException} object that was intercepted
      * @return {@link ResponseEntity} object with error cause and {@link org.springframework.http.HttpStatus}
      */

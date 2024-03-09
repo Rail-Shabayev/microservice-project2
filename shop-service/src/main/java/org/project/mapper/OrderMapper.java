@@ -11,7 +11,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OrderMapper {
 
-    /** maps {@link OrderDto} to {@link Order} object
+    /**
+     * maps {@link OrderDto} to {@link Order} object
+     *
      * @param orderDto {@link OrderDto} object that needs to be mapped to {@link Order} else it saves {@link OrderDto} with old uuid as in PUT request
      * @return {@link Order} object
      */
@@ -26,6 +28,7 @@ public class OrderMapper {
 
     /**
      * maps {@link Order}  to {@link OrderDto} object
+     *
      * @param order {@link Order} object that needs to be mapped to {@link OrderDto}
      * @return {@link OrderDto} object
      */

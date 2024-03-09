@@ -21,6 +21,4 @@ public class User {
     private String addresses;
     private String phone;
     private String website;
-//    private List<String> company;
-
 }

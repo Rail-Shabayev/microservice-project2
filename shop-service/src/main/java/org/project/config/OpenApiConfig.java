@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         name = "Rail Shabayev",
                         url = "https://github.com/Rail-Shabayev",
                         email = "rail.shabayev@mail.ru"
-                        ),
+                ),
                 description = "Storehouse test project for MediaSoft",
                 version = "1.0"
         ),

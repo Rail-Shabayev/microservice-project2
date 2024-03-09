@@ -16,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
-//@NamedEntityGraph(name = "shipper-graph", attributeNodes = @NamedAttributeNode("products"))
 public class Manufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -25,7 +24,7 @@ public class Manufacturer {
     @NotBlank
     @Size(min = 2)
     private String shipperName;
-//    @PhoneNumber(message = "Phone number is not valid")
+    //    @PhoneNumber(message = "Phone number is not valid")
     private String phoneNumber;
     @Email
     private String email;
