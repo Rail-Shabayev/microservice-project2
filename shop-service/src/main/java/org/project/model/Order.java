@@ -53,4 +53,8 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     private Set<OrderDetails> orderDetails;
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id")
+    private User user;
 }

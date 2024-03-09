@@ -31,6 +31,7 @@ public class OrderService {
 
     /**
      * searching for all products in the database
+     *
      * @return list of {@link OrderDto}
      */
     @Transactional(readOnly = true)
@@ -42,20 +43,21 @@ public class OrderService {
 
     /**
      * saves passed {@link OrderDto} object to the database
+     *
      * @param orderDto {@link OrderDto} object that was passed by the user
      * @return status of method work
      */
     public String saveOrder(OrderDto orderDto) {
         Order order = mapper.mapToEntity(orderDto);
         order.setDateCreated(LocalDate.now());
-
         orderRepository.save(order);
         return "order saved";
     }
 
     /**
      * changes existing {@link Order} object to new one
-     * @param id name of the {@link Order} to be changed
+     *
+     * @param id       name of the {@link Order} to be changed
      * @param orderDto {@link OrderDto} object that was passed by the user
      * @return status of method work
      * @throws OrderNotFoundException if {@link Order} with provided id is not found in database
@@ -72,6 +74,7 @@ public class OrderService {
 
     /**
      * deletes {@link Order} from the database
+     *
      * @param id name of the {@link Order} that user wants to delete
      * @return string with operation work status
      * @throws OrderNotFoundException if {@link Order} with provided id is not found in database

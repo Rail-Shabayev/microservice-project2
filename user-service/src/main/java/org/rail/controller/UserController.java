@@ -27,8 +27,7 @@ public class UserController {
     public List<User> getAllUsers() {
         return restClient.get()
                 .retrieve()
-                .body(new ParameterizedTypeReference<>() {
-                });
+                .body(new ParameterizedTypeReference<>() {});
     }
 
     @GetMapping("/db")
