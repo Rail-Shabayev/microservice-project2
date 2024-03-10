@@ -11,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.util.List;
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Testcontainers
@@ -33,4 +36,17 @@ public class ProductRepositoryTest extends ContainerStart {
                 .isEqualTo(product);
     }
 
+    @Test
+    public void shouldFindAll() {
+        productRepository.save(product);
+        List<Product> savedProducts = productRepository.findAll();
+        assertThat(savedProducts).isNotEmpty();
+    }
+
+    @Test
+    public void shouldFindById() {
+        productRepository.save(product);
+        Optional<Product> actualProduct = productRepository.findById(1L);
+        assertThat(actualProduct.get().getName()).isEqualTo(product.getName());
+    }
 }
