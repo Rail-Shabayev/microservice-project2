@@ -23,6 +23,8 @@ public class OrderMapper {
                 .status(orderDto.getStatus())
                 .deliveryDate(orderDto.getDeliveryDate())
                 .dateCreated(orderDto.getDateCreated())
+                .orderDetails(orderDto.getOrderDetails())
+                .user(orderDto.getUser())
                 .build();
     }
 
@@ -38,6 +40,8 @@ public class OrderMapper {
                 .status(order.getStatus())
                 .dateCreated(order.getDateCreated())
                 .deliveryDate(order.getDeliveryDate())
+                .orderDetails(order.getOrderDetails())
+                .user(order.getUser())
                 .build();
     }
 

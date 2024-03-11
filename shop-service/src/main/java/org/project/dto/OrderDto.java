@@ -1,11 +1,15 @@
 package org.project.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import lombok.*;
+import org.project.model.OrderDetails;
 import org.project.model.Shipper;
 import org.project.model.Status;
+import org.project.model.User;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 /**
  * Dto object of product entity
@@ -35,4 +39,11 @@ public class OrderDto {
     @Setter(AccessLevel.NONE)
     @Schema(description = "date of product creation")
     private LocalDate dateCreated;
+
+    @OneToMany(mappedBy = "order")
+    private Set<OrderDetails> orderDetails;
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id")
+    private User user;
 }
