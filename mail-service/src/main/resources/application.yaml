@@ -3,3 +3,14 @@ server:
 spring:
   application:
     name: mail-service
+  mail:
+    port: 587
+    host: live.smtp.mailtrap.io
+    username: api
+    password: 6f2f3e67d86b16dfb5fba93f999e39ab
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
