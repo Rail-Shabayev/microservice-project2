@@ -2,10 +2,12 @@ package org.project.service;
 
 import lombok.RequiredArgsConstructor;
 import org.project.dto.OrderDto;
+import org.project.event.OrderPlacedEvent;
 import org.project.exception.OrderNotFoundException;
 import org.project.mapper.OrderMapper;
 import org.project.model.Order;
 import org.project.repository.OrderRepository;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,7 @@ public class OrderService {
      * property for mapping {@link Order} and {@link OrderDto} class
      */
     private final OrderMapper mapper;
+    private final KafkaTemplate kafkaTemplate;
 
     /**
      * searching for all products in the database
@@ -51,6 +54,14 @@ public class OrderService {
         Order order = mapper.mapToEntity(orderDto);
         order.setDateCreated(LocalDate.now());
         orderRepository.save(order);
+        OrderPlacedEvent data = new OrderPlacedEvent(
+                orderDto.getOrderDetails()
+                        .stream()
+                        .map(orderDetails -> orderDetails.getProduct().getName())
+                        .toList(),
+                orderDto.getUser().getName(),
+                orderDto.getDeliveryDate());
+        kafkaTemplate.send("notificationTopic", data);
         return "order saved";
     }
 

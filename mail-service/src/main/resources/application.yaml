@@ -14,3 +14,20 @@ spring:
           auth: true
           starttls:
             enable: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    template:
+      default-topic: notificationTopic
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            type:
+              mapping: event:org.rail.project.event.OrderPlacedEvent
+      group-id: notificationId
+logging:
+  pattern:
+    console: "%clr(%d{HH:mm:ss}){magenta} 🈸 %clr(%-5level) 👉  %clr(%msg%n){blue}"

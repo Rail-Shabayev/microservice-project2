@@ -9,7 +9,7 @@ import org.project.model.Status;
 import org.project.model.User;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Dto object of product entity
@@ -41,7 +41,7 @@ public class OrderDto {
     private LocalDate dateCreated;
 
     @OneToMany(mappedBy = "order")
-    private Set<OrderDetails> orderDetails;
+    private List<OrderDetails> orderDetails;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
