@@ -13,3 +13,6 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 server:
   port: 0
+logging:
+  pattern:
+    console: "%clr(%d{HH:mm:ss}){magenta} 🈸 %clr(%-5level) 👉  %msg%n"
