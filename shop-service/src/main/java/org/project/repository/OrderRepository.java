@@ -10,12 +10,14 @@ import java.util.List;
  * OrderRepository interface for persisting data into db.
  */
 public interface OrderRepository extends JpaRepository<Order, Long> {
+
     /**
      * Returns all instances of the type.
      *
      * @return all entities
      */
+    @EntityGraph(attributePaths = {"shipper", "user", "orderDetails"}, type = EntityGraph.EntityGraphType.LOAD)
     @Override
-    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = "shipper")
     List<Order> findAll();
+
 }

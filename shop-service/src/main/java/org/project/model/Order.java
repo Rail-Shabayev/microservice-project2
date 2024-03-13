@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Product entity
@@ -36,7 +36,7 @@ public class Order {
      * shipper
      */
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shipper_id")
     private Shipper shipper;
 
@@ -52,9 +52,10 @@ public class Order {
     private LocalDate dateCreated;
 
     @OneToMany(mappedBy = "order")
-    private Set<OrderDetails> orderDetails;
+    private List<OrderDetails> orderDetails;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "users_id")
     private User user;
 }

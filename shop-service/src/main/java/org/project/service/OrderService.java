@@ -57,7 +57,7 @@ public class OrderService {
         OrderPlacedEvent data = new OrderPlacedEvent(
                 orderDto.getOrderDetails()
                         .stream()
-                        .map(orderDetails -> orderDetails.getProduct().getName())
+                        .map(orderDetails -> orderDetails.toString())//getProduct().getName())
                         .toList(),
                 orderDto.getUser().getName(),
                 orderDto.getDeliveryDate());
