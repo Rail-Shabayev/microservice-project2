@@ -17,8 +17,6 @@ spring:
 
   kafka:
     bootstrap-servers: localhost:9092
-    template:
-      default-topic: notificationTopic
     consumer:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
@@ -26,7 +24,8 @@ spring:
         spring:
           json:
             type:
-              mapping: event:org.rail.project.event.OrderPlacedEvent
+              mapping: event:org.project.event.OrderPlacedEvent, event2:org.rail.project.event.ProductMadeEvent
+
       group-id: notificationId
 logging:
   pattern:

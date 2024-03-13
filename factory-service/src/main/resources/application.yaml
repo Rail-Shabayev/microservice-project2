@@ -7,6 +7,18 @@ spring:
     hibernate.ddl-auto: create-drop
   application:
     name: factory-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    template:
+      default-topic: 2notificationTopic
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring:
+          json:
+            type:
+              mapping: event2:org.rail.project.event.ProductMadeEvent
 eureka:
   client:
     serviceUrl:
