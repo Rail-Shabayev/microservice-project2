@@ -20,6 +20,13 @@ spring:
         locator:
           enabled: true
       routes:
+        - id: mail-service
+          uri: lb://mail-service
+          predicates:
+            - Path=/mail/**
+          filters:
+            - RewritePath=/mail/(?<path>.*), /$\{path}
+
         - id: factory-service
           uri: lb://factory-service
           predicates:
