@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.rail.project.annotation.PhoneNumber;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
-public class Manufacturer {
+public class Manufacturer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;

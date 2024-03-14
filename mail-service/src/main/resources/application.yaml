@@ -24,7 +24,7 @@ spring:
         spring:
           json:
             type:
-              mapping: event:org.project.event.OrderPlacedEvent, event2:org.rail.project.event.ProductMadeEvent
+              mapping: event:org.rail.project.event.OrderPlacedEvent, event2:org.rail.project.event.ProductMadeEvent
 
       group-id: notificationId
 logging:

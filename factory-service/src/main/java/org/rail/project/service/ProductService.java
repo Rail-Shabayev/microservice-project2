@@ -12,6 +12,9 @@ import org.rail.project.exception.ProductNotFoundException;
 import org.rail.project.mapper.ProductMapper;
 import org.rail.project.model.Product;
 import org.rail.project.repository.ProductRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +25,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@CacheConfig(cacheNames = {"product"})
 public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper mapper;
@@ -29,6 +33,7 @@ public class ProductService {
     private final KafkaTemplate kafkaTemplate;
 
     @Transactional(readOnly = true)
+    @CachePut
     public List<ProductDto> fetchProducts() {
         return productRepository.findAll().stream()
                 .map(mapper::mapToDto)
@@ -46,6 +51,7 @@ public class ProductService {
     }
 
 
+    @CachePut(key = "#id")
     public String putProduct(Long id, ProductDto productDto) throws ProductNotFoundException {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
@@ -59,6 +65,7 @@ public class ProductService {
     //    {"op":"replace","path":"/telephone","value":"+1-555-56"},
 //    {"op":"add","path":"/favorites/0","value":"Bread"}
 //    what the fuck did I do
+    @CachePut(key = "#id")
     public String patchProduct(Long id, JsonPatch jsonPatch) throws ProductNotFoundException {
         Product product = productRepository.findById(id).orElseThrow(
                 () -> new ProductNotFoundException("Product not found with id: " + id)
@@ -80,6 +87,7 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
+    @CachePut
     public ProductDto fetchProductById(Long id) throws ProductNotFoundException {
         Product product = productRepository.findById(id).orElseThrow(
                 () -> new ProductNotFoundException("Product not found with id: " + id)
@@ -87,6 +95,7 @@ public class ProductService {
         return mapper.mapToDto(product);
     }
 
+    @CacheEvict(key = "#id")
     public String deleteProduct(Long id) throws ProductNotFoundException {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));

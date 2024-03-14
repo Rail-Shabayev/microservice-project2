@@ -3,6 +3,7 @@ package org.rail.project.dto;
 import lombok.*;
 import org.rail.project.model.Manufacturer;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Data
-public class ProductDto {
+public class ProductDto implements Serializable {
     private String name;
     private BigDecimal price;
 
