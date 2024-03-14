@@ -19,6 +19,11 @@ spring:
           json:
             type:
               mapping: event2:org.rail.project.event.ProductMadeEvent
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 20MB
 eureka:
   client:
     serviceUrl:
