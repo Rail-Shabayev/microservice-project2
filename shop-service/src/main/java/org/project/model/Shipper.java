@@ -20,10 +20,7 @@ public class Shipper {
 
     private String shipperName;
 
-    @OneToMany(
-            mappedBy = "shipper",
-            cascade = CascadeType.ALL
-    )
+    @OneToMany(mappedBy = "shipper")
     private List<Order> orderList;
 
 }

@@ -16,7 +16,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
      *
      * @return all entities
      */
-    @EntityGraph(attributePaths = {"shipper", "user", "orderDetails"}, type = EntityGraph.EntityGraphType.LOAD)
+    @EntityGraph(attributePaths = {"shipper", "user", "orderDetails.product"}, type = EntityGraph.EntityGraphType.LOAD)
     @Override
     List<Order> findAll();
 

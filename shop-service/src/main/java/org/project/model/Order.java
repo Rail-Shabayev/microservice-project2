@@ -33,14 +33,6 @@ public class Order {
     private Status status;
 
     /**
-     * shipper
-     */
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shipper_id")
-    private Shipper shipper;
-
-    /**
      * date of delivery
      */
     private LocalDate deliveryDate;
@@ -54,8 +46,16 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderDetails> orderDetails;
 
+    /**
+     * shipper
+     */
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne
+    @JoinColumn(name = "shipper_id")
+    private Shipper shipper;
+
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "users_id")
     private User user;
 }

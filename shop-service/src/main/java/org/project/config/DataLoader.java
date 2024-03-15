@@ -31,41 +31,25 @@ public class DataLoader {
     @Bean
     CommandLineRunner runner(ShipperRepository shipperRepository,
                              UserRepository userRepository,
-                             ProductRepository productRepository,
-                             OrderDetailsRepository orderDetailsRepository,
-                             OrderRepository orderRepository) {
+                             ManufacturerRepository  manufacturerRepository) {
         return args -> {
-            Shipper shipper = Shipper.builder()
-                    .id(1L)
-                    .shipperName("shipper1")
-                    .build();
-            shipperRepository.save(shipper);
             List<User> users = restClient.get()
                     .retrieve()
                     .body(new ParameterizedTypeReference<>() {
                     });
-            if (users != null) {
-                userRepository.saveAll(users);
-            }
-            Product product = Product.builder()
-                    .dateCreated(LocalDate.now())
-                    .name("prod")
-                    .price(new BigDecimal(23))
-                    .manufacturer(null)
-                    .orderDetails(List.of(new OrderDetails()))
+            Shipper shipper = Shipper.builder()
+                    .id(1L)
+                    .shipperName("shipper1")
                     .build();
-            productRepository.save(product);
-            Order order = Order.builder()
-                    .user(users.get(1))
-                    .status(Status.SEND)
-                    .shipper(shipper)
-                    .deliveryDate(LocalDate.now())
-                    .dateCreated(LocalDate.now())
-                    .orderDetails(null)
+            Manufacturer manufacturer = Manufacturer.builder()
+                    .id(1L)
+                    .shipperName("Navalny")
+                    .email("navalny@super.ru")
+                    .phoneNumber("+1 (415) 555‑0132")
                     .build();
-            orderRepository.save(order);
-            OrderDetails orderDetails = new OrderDetails(1L, order, product, new BigDecimal(38), 2);
-            orderDetailsRepository.save(orderDetails);
+            shipperRepository.save(shipper);
+            manufacturerRepository.save(manufacturer);
+            userRepository.saveAll(users);
         };
     }
 }

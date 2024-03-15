@@ -33,11 +33,10 @@ public class Product {
     private LocalDate dateCreated;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE) //changed cascadeType from All to merge
+    @ManyToOne
     @JoinColumn(name = "manufacturer_id")
-    private Manufacturer manufacturer;
-//    https://habr.com/ru/articles/714704/
+    private Manufacturer manufacturer; //    https://habr.com/ru/articles/714704/
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product")
     private List<OrderDetails> orderDetails;
 }

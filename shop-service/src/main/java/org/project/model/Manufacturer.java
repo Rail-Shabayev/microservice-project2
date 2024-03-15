@@ -29,10 +29,7 @@ public class Manufacturer {
     @Email
     private String email;
 
-    @OneToMany(
-            mappedBy = "manufacturer",
-            cascade = CascadeType.ALL
-    )
+    @OneToMany(mappedBy = "manufacturer")
     private List<Product> products;
 
 }

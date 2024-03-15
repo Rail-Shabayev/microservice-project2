@@ -24,7 +24,8 @@ public class User {
     private String addresses;
     private String phone;
     private String website;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "user")
     @ToString.Exclude
     private List<Order> orders;
 
