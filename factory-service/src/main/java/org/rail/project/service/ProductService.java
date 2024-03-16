@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import lombok.RequiredArgsConstructor;
+import org.rail.project.dao.ProductRepositoryDao;
 import org.rail.project.dto.ProductDto;
 import org.rail.project.event.ProductMadeEvent;
 import org.rail.project.exception.ProductNotFoundException;
@@ -33,6 +34,7 @@ public class ProductService {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final KafkaTemplate kafkaTemplate;
     private final ManufacturerRepository manufacturerRepository;
+    private final ProductRepositoryDao productRepositoryDao;
 
     @Transactional(readOnly = true)
     @CachePut
@@ -66,7 +68,8 @@ public class ProductService {
         productRepository.save(mappedToEntity);
         return "product updated";
     }
-//    {"op":"replace","path":"/telephone","value":"+1-555-56"},
+
+    //    {"op":"replace","path":"/telephone","value":"+1-555-56"},
 //    {"op":"add","path":"/favorites/0","value":"Bread"}
 //    what the fuck did I do
     @CachePut(key = "#id")
@@ -105,5 +108,14 @@ public class ProductService {
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
         productRepository.delete(product);
         return "product deleted";
+    }
+
+    public List<ProductDto> getProductsWithCriteria() {
+        return productRepositoryDao
+                .getProductsWithCriteria()
+                .stream()
+                .map(mapper::mapToDto)
+                .toList();
+
     }
 }

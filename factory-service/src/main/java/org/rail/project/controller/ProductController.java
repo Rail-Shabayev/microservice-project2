@@ -43,6 +43,13 @@ public class ProductController implements ProductControllerApi {
     }
 
     @Override
+    @GetMapping("/criteria")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductDto> getProductsWithCriteria() {
+        return productService.getProductsWithCriteria();
+    }
+
+    @Override
     @PatchMapping(value = "/{id}", consumes = "application/json-patch+json")
     @ResponseStatus(HttpStatus.CREATED)
     public String patchProduct(@PathVariable Long id, @RequestBody JsonPatch jsonPatch) throws ProductNotFoundException {

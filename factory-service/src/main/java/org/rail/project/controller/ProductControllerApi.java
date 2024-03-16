@@ -88,6 +88,8 @@ public interface ProductControllerApi {
                       @Parameter(required = true, description = "Name of the object that needs to be updated")
                       @PathVariable("id") Long id) throws ProductNotFoundException;
 
+    List<ProductDto> getProductsWithCriteria();
+
     @Operation(summary = "PATCH a product in factory", requestBody = @RequestBody(
             required = true, content = @Content(
             schema = @Schema(
