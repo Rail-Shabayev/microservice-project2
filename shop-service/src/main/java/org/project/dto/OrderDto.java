@@ -1,28 +1,28 @@
 package org.project.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Setter;
 import org.project.model.OrderDetails;
 import org.project.model.Shipper;
 import org.project.model.Status;
 import org.project.model.User;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Dto object of product entity
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 public class OrderDto {
-
-    private Shipper shipper;
-
     private Status status;
+    private Shipper shipper;
+    private User user;
+    private Set<OrderDetails> orderDetails;
 
     /**
      * last quantity updated date
@@ -39,11 +39,4 @@ public class OrderDto {
     @Setter(AccessLevel.NONE)
     @Schema(description = "date of product creation")
     private LocalDate dateCreated;
-
-    @OneToMany(mappedBy = "order")
-    private List<OrderDetails> orderDetails;
-
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id")
-    private User user;
 }

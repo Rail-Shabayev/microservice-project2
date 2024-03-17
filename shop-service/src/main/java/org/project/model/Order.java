@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Product entity
@@ -44,7 +44,7 @@ public class Order {
     private LocalDate dateCreated;
 
     @OneToMany(mappedBy = "order")
-    private List<OrderDetails> orderDetails;
+    private Set<OrderDetails> orderDetails;
 
     /**
      * shipper

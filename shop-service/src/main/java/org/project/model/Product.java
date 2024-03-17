@@ -12,7 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @RequiredArgsConstructor
@@ -34,9 +34,10 @@ public class Product {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "manufacturer_id")
-    private Manufacturer manufacturer; //    https://habr.com/ru/articles/714704/
+    @JoinColumn(name = "products")
+    private Manufacturer manufacturer;
 
-    @OneToMany(mappedBy = "product")
-    private List<OrderDetails> orderDetails;
+    @OneToMany
+    @JoinColumn(name = "product")
+    private Set<OrderDetails> orderDetails;
 }

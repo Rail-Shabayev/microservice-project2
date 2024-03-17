@@ -1,31 +1,38 @@
 package org.project.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Immutable;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
+@Immutable
 public class OrderDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Embeddable
+    @RequiredArgsConstructor
+    @EqualsAndHashCode
+    public static class Id implements Serializable {
+        @Column(name = "order_id")
+        protected Long orderId;
 
-    @JsonIgnore
+        @Column(name = "product_id")
+        protected Long productId;
+    }
+
+    @EmbeddedId
+    protected Id id = new Id();
+
+//    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_id", insertable = false, updatable = false)
     private Order order;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
     private Product product;
 
     private BigDecimal price;

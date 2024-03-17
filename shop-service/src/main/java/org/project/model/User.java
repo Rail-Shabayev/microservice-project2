@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -27,7 +27,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
-    private List<Order> orders;
+    private Set<Order> orders;
 
     @Override
     public final boolean equals(Object o) {

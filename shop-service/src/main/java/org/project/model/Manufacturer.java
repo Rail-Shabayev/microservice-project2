@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -30,7 +30,7 @@ public class Manufacturer {
     private String email;
 
     @OneToMany(mappedBy = "manufacturer")
-    private List<Product> products;
+    private Set<Product> products;
 
 }
 
