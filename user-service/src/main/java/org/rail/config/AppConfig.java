@@ -2,6 +2,7 @@ package org.rail.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -13,10 +14,18 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 public class AppConfig {
 
     @Bean
-    public JedisConnectionFactory jedisConnectionFactory() {
+    @Profile("!docker")
+    public JedisConnectionFactory jedisConnectionFactoryDocker() {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6379);
         return new JedisConnectionFactory(config);
     }
+    @Bean
+    @Profile("docker")
+    public JedisConnectionFactory jedisConnectionFactory() {
+        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("redis", 6379);
+        return new JedisConnectionFactory(config);
+    }
+
 
     @Bean
     public RedisTemplate<?, ?> redisTemplate(RedisConnectionFactory factory) {

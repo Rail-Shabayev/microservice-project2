@@ -1,3 +1,8 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
 server:
   port: 0
 spring:
