@@ -69,7 +69,7 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=password
   api-gateway:
-    image: api-gateway
+    image: railshabayev416/api-gateway
     container_name: api-gateway
     environment:
       - SPRING_PROFILE_ACTIVE=docker
@@ -79,7 +79,7 @@ services:
       - discovery-server
 
   discovery-server:
-    image: discovery-server
+    image: railshabayev416/discovery-server
     container_name: railshabayev416/discovery-server
     environment:
       - SPRING_PROFILE_ACTIVE=docker
@@ -87,7 +87,7 @@ services:
       - "8761:8761"
 
   factory-service:
-    image: factory-service
+    image: railshabayev416/factory-service
     container_name: factory-service
     environment:
       - SPRING_PROFILE_ACTIVE=docker
@@ -100,7 +100,7 @@ services:
       - mail-service
 
   mail-service:
-    image: mail-service
+    image: railshabayev416/mail-service
     container_name: mail-service
     environment:
       - SPRING_PROFILE_ACTIVE=docker
@@ -110,7 +110,7 @@ services:
       - broker
 
   shop-service:
-    image: shop-service
+    image: railshabayev416/shop-service
     container_name: shop-service
     environment:
       - SPRING_PROFILE_ACTIVE=docker
@@ -123,7 +123,7 @@ services:
       - user-service
 
   user-service:
-    image: user-service
+    image: railshabayev416/user-service
     container_name: user-service
     environment:
       - SPRING_PROFILE_ACTIVE=docker
