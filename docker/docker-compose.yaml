@@ -1,3 +1,5 @@
+version: '3'
+
 services:
   postgres:
     image: postgres:alpine
@@ -68,21 +70,22 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=password
+
   api-gateway:
     image: railshabayev416/api-gateway
     container_name: api-gateway
     environment:
-      - SPRING_PROFILE_ACTIVE=docker
+      SPRING_PROFILES_ACTIVE: 'docker'
     ports:
       - "8080:8080"
     depends_on:
       - discovery-server
 
   discovery-server:
-    image: railshabayev416/discovery-server
-    container_name: railshabayev416/discovery-server
+    image: railshabayev416/discovery-server:latest
+    container_name: discovery-server
     environment:
-      - SPRING_PROFILE_ACTIVE=docker
+      SPRING_PROFILES_ACTIVE: 'docker'
     ports:
       - "8761:8761"
 
@@ -90,7 +93,7 @@ services:
     image: railshabayev416/factory-service
     container_name: factory-service
     environment:
-      - SPRING_PROFILE_ACTIVE=docker
+      SPRING_PROFILES_ACTIVE: 'docker'
     depends_on:
       - discovery-server
       - postgres
@@ -103,7 +106,7 @@ services:
     image: railshabayev416/mail-service
     container_name: mail-service
     environment:
-      - SPRING_PROFILE_ACTIVE=docker
+      SPRING_PROFILES_ACTIVE: 'docker'
     depends_on:
       - discovery-server
       - api-gateway
@@ -113,7 +116,7 @@ services:
     image: railshabayev416/shop-service
     container_name: shop-service
     environment:
-      - SPRING_PROFILE_ACTIVE=docker
+      SPRING_PROFILES_ACTIVE: 'docker'
     depends_on:
       - api-gateway
       - discovery-server
@@ -126,10 +129,11 @@ services:
     image: railshabayev416/user-service
     container_name: user-service
     environment:
-      - SPRING_PROFILE_ACTIVE=docker
+      SPRING_PROFILES_ACTIVE: 'docker'
     depends_on:
       - api-gateway
       - discovery-server
       - redis
+
 volumes:
   grafana-storage:

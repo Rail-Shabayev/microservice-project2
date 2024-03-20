@@ -16,8 +16,8 @@
     <description>secondMicroservices</description>
     <packaging>pom</packaging>
     <modules>
-        <module>factory-service</module>
         <module>shop-service</module>
+        <module>factory-service</module>
         <module>api-gateway</module>
         <module>discovery-server</module>
         <module>user-service</module>
@@ -51,6 +51,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <pullPolicy>IF_NOT_PRESENT</pullPolicy>
+                        <env>
+                            <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
+                        </env>
+                    </image>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
