@@ -1,13 +1,13 @@
+# configures RestClient bean to work in docker container
+service.docker.environment: true
 spring:
-  application:
-    name: shop-service
   datasource:
     url: jdbc:postgresql://postgres:5432/postgres
     password: password
     username: postgres
   kafka:
-    bootstrap-servers: kafka:29092
+    bootstrap-servers: broker:29092
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://eureka:password@discovery-server:8761/eureka/
+      defaultZone: http://discovery-server:8761/eureka/
