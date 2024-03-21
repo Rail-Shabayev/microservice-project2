@@ -10,6 +10,15 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
 
+  postgres-factory:
+    image: postgres:alpine
+    ports:
+      - "5433:5432"
+    container_name: postgres-factory
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+
   redis:
     image: redis:7.2.4-alpine
     container_name: redis
