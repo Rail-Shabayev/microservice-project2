@@ -1,8 +1,8 @@
 package org.rail.project.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -21,13 +21,13 @@ public class RedisConfig {
     }
 
     @Bean
-    @Profile("!docker")
+    @ConditionalOnProperty(prefix="service.docker", name = "environment", havingValue = "false")
     public JedisConnectionFactory jedisConnectionFactoryDocker() {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6379);
         return new JedisConnectionFactory(config);
     }
     @Bean
-    @Profile("docker")
+    @ConditionalOnProperty(prefix="service.docker", name = "environment", havingValue = "true")
     public JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("redis", 6379);
         return new JedisConnectionFactory(config);
