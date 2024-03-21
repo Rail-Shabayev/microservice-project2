@@ -79,6 +79,7 @@ public class OrderService {
         Order mappedToEntity = mapper.mapToEntity(orderDto);
         mappedToEntity.setDeliveryDate(LocalDate.now());
         mappedToEntity.setDateCreated(order.getDateCreated());
+        mappedToEntity.setId(id);
         orderRepository.save(mappedToEntity);
         return "order updated";
     }

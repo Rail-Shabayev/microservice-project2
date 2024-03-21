@@ -22,8 +22,12 @@ public class ImageController {
     @PostMapping("/upload")
     public ResponseData uploadFile(@RequestParam("file") MultipartFile file) {
         ProductImage productImage = imageService.saveFile(file);
-        String downloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/download/")
+        String downloadUri = ServletUriComponentsBuilder
+                .newInstance()
+                .scheme("http")
+                .host("localhost")
+                .port(8080)
+                .path("/factory/download/")
                 .path(String.valueOf(productImage.getId()))
                 .toUriString();
         return new ResponseData(productImage.getFileName(),

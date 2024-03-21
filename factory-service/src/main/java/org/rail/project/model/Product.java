@@ -36,7 +36,7 @@ public class Product implements Serializable {
 
     @NotNull
     @JsonIgnore
-    @ManyToOne //changed cascadeType from All to merge
+    @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 //    https://habr.com/ru/articles/714704/

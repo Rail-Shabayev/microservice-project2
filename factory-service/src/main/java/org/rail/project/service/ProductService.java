@@ -83,6 +83,7 @@ public class ProductService {
         } catch (JsonPatchException | JsonProcessingException e1) {
             throw new RuntimeException(e1);
         }
+        productPatched.setManufacturer(product.getManufacturer());
         productRepository.save(productPatched);
         return "product updated";
     }
