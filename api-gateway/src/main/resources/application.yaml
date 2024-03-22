@@ -18,6 +18,7 @@ springdoc:
         url: /v3/api-docs/user
       - name: mail
         url: /v3/api-docs/mail
+    path: /openApi
 spring:
   application:
     name: api-gateway
