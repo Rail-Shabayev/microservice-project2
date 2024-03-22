@@ -22,13 +22,13 @@ public class RedisConfig {
 
     @Bean
     @ConditionalOnProperty(prefix="service.docker", name = "environment", havingValue = "false")
-    public JedisConnectionFactory jedisConnectionFactoryDocker() {
+    public JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6379);
         return new JedisConnectionFactory(config);
     }
     @Bean
     @ConditionalOnProperty(prefix="service.docker", name = "environment", havingValue = "true")
-    public JedisConnectionFactory jedisConnectionFactory() {
+    public JedisConnectionFactory jedisConnectionFactoryDocker() {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("redis", 6379);
         return new JedisConnectionFactory(config);
     }
