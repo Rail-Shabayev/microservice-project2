@@ -14,8 +14,10 @@ springdoc:
         url: /v3/api-docs/factory
       - name: shop
         url: /v3/api-docs/shop
-      - name: users
-        url: /v3/api-docs/users
+      - name: user
+        url: /v3/api-docs/user
+      - name: mail
+        url: /v3/api-docs/mail
 spring:
   application:
     name: api-gateway
