@@ -1,36 +1,21 @@
 package org.rail.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
 
-@Configuration
-@EnableRedisRepositories
+@OpenAPIDefinition(
+        info = @Info(title = "User service",
+                version = "1.0",
+                contact = @Contact(
+                        name = "Rail Sha",
+                        url = "https://github.com/Rail-Shabayev")),
+        servers = {
+                @Server(
+                        description = "Local environment",
+                        url = "http://localhost:8080"
+                )
+        })
 public class AppConfig {
-
-    @Bean
-    @Profile("!docker")
-    public JedisConnectionFactory jedisConnectionFactoryDocker() {
-        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6379);
-        return new JedisConnectionFactory(config);
-    }
-    @Bean
-    @Profile("docker")
-    public JedisConnectionFactory jedisConnectionFactory() {
-        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("redis", 6379);
-        return new JedisConnectionFactory(config);
-    }
-
-
-    @Bean
-    public RedisTemplate<?, ?> redisTemplate(RedisConnectionFactory factory) {
-        RedisTemplate<byte[], byte[]> template = new RedisTemplate<>();
-        template.setConnectionFactory(factory);
-        return template;
-    }
 }

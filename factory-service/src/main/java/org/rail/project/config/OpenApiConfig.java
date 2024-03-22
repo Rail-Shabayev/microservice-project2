@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 title = "Factory service",
                 contact = @Contact(name = "rail", url = "https://github.com/Rail-Shabayev")),
         servers = {
-                @Server(url = "http://locahost:8081",
+                @Server(url = "http://locahost:8080",
                         description = "default server of the service")
         }
 

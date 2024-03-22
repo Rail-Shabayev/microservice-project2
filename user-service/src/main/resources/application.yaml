@@ -1,3 +1,5 @@
+# configures RestClient bean to work in local environment
+service.docker.environment: false
 management:
   endpoints:
     web:

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequiredArgsConstructor
-public class ImageController {
+public class ImageController implements ImageOpenApiSpec {
 
     private final ImageService imageService;
 

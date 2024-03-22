@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/users")
 @Transactional
-public class UserController {
+public class UserController implements UserOpenApi{
 
     RestClient restClient = RestClient.builder()
             .baseUrl("https://jsonplaceholder.typicode.com/users")

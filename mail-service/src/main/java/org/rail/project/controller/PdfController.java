@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/")
-public class PdfController {
+public class PdfController implements PdfOpenApi {
 
     private final PdfGeneratorService pdfGeneratorService;
 

@@ -10,19 +10,17 @@ import io.swagger.v3.oas.annotations.servers.Server;
  */
 @OpenAPIDefinition(
         info = @Info(
-                title = "OpenApi specification",
+                title = "Shop service",
                 contact = @Contact(
                         name = "Rail Shabayev",
-                        url = "https://github.com/Rail-Shabayev",
-                        email = "rail.shabayev@mail.ru"
+                        url = "https://github.com/Rail-Shabayev"
                 ),
-                description = "Storehouse test project for MediaSoft",
                 version = "1.0"
         ),
         servers = {
                 @Server(
                         description = "Local environment",
-                        url = "http://localhost:8080/api/product"
+                        url = "http://localhost:8080"
                 )
         }
 )
