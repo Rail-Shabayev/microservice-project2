@@ -1,5 +1,7 @@
 # configures RestClient bean to work in docker container
 service.docker.environment: true
+server:
+  port: 8080
 spring:
   datasource:
     url: jdbc:postgresql://postgres-factory:5432/postgres

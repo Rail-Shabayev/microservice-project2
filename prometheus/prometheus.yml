@@ -1,23 +1,29 @@
 global:
-  scrape_interval:     10s
+  scrape_interval: 10s
   evaluation_interval: 10s
 
 scrape_configs:
   - job_name: 'shop_service'
-    metrics_path: '/shop/actuator/prometheus'
+    metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['localhost:8080']
+      - targets: [ 'shop-service:8080' ]
         labels:
           application: 'Shop Application'
   - job_name: 'user_service'
-    metrics_path: '/user/actuator/prometheus'
+    metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['localhost:8080']
+      - targets: [ 'user-service:8080' ]
         labels:
           application: 'User Application'
   - job_name: 'factory_service'
-    metrics_path: '/factory/actuator/prometheus'
+    metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['localhost:8080']
+      - targets: [ 'factory-service:8080' ]
         labels:
           application: 'Factory Application'
+  - job_name: 'mail_service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'mail-service:8080' ]
+        labels:
+          application: 'Mail service Application'
