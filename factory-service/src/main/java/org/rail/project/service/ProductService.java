@@ -12,7 +12,6 @@ import org.rail.project.event.ProductMadeEvent;
 import org.rail.project.exception.ProductNotFoundException;
 import org.rail.project.mapper.ProductMapper;
 import org.rail.project.model.Product;
-import org.rail.project.repository.ManufacturerRepository;
 import org.rail.project.repository.ProductRepository;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -33,7 +32,6 @@ public class ProductService {
     private final ProductMapper mapper;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final KafkaTemplate kafkaTemplate;
-    private final ManufacturerRepository manufacturerRepository;
     private final ProductRepositoryDao productRepositoryDao;
 
     @Transactional(readOnly = true)
@@ -47,9 +45,6 @@ public class ProductService {
     public String saveProduct(ProductDto productDto) {
         Product product = mapper.mapToEntity(productDto);
         product.setDateCreated(LocalDate.now());
-        if (manufacturerRepository.findAll().isEmpty()) {
-            throw new RuntimeException("No manufacturer in the table");
-        }
         productRepository.save(product);
         ProductMadeEvent productMadeEvent = new ProductMadeEvent(productDto.getName(), productDto.getDateCreated(), productDto
                 .getPrice());

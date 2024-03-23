@@ -2,6 +2,7 @@ package org.rail.project.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
+import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,15 +15,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.rail.project.dto.ProductDto;
 import org.rail.project.exception.ProductNotFoundException;
 import org.rail.project.mapper.ProductMapper;
-import org.rail.project.model.Manufacturer;
 import org.rail.project.model.Product;
 import org.rail.project.repository.ProductRepository;
+import org.springframework.kafka.core.KafkaTemplate;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,14 +33,16 @@ import static org.mockito.Mockito.*;
 class ProductServiceTest {
     @Mock
     private ProductRepository productRepository;
-
+    @Mock
+    private KafkaTemplate kafkaTemplate;
     @Mock
     private ProductMapper productMapper;
-
-    private Product product;
     @InjectMocks
     private ProductService productService;
-    private ProductDto productDto;
+
+    private final Product product = Instancio.create(Product.class);
+
+    private final ProductDto productDto = Instancio.create(ProductDto.class);
 
     @Captor
     ArgumentCaptor<Product> argumentCaptor;
@@ -50,12 +51,6 @@ class ProductServiceTest {
 
     @BeforeEach
     void setUp() throws IOException {
-//        productService = new ProductService(productRepository, productMapper);
-        productDto = new ProductDto("rail", new BigDecimal(23), LocalDate.now(),
-                new Manufacturer(1L, "man", null, null, null));
-        product = new Product(1L, "rail",
-                new BigDecimal(23), LocalDate.now(),
-                new Manufacturer(1L, "man", null, null, null));
         String json = "[{\"op\":\"replace\",\"path\":\"/name\",\"value\":\"rail2\"}]";
         ObjectMapper objectMapper = new ObjectMapper();
         InputStream stream = new ByteArrayInputStream(json.getBytes());
@@ -63,7 +58,7 @@ class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Get all products from db without an error")
+    @DisplayName("GET all products from db without an error")
     void fetchProductsTest() {
         // Arrange
         List<Product> actualReturn = List.of(product);
@@ -76,7 +71,7 @@ class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("successfully save given ProductDto object")
+    @DisplayName("successfully POST given ProductDto object")
     void saveProduct() {
         // Arrange
         // Act
@@ -101,7 +96,7 @@ class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("should partially Patch old productDto to the new one")
+    @DisplayName("should partially PATCH old productDto to the new one")
     void shouldPatchProduct() throws ProductNotFoundException {
         // Arrange
         // Act
@@ -114,7 +109,17 @@ class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("get product by id")
+    @DisplayName("should DELETE product")
+    void deleteProduct() throws ProductNotFoundException {
+        //Arrange
+        //Act
+        when(productRepository.findById(1L)).thenReturn(Optional.ofNullable(product));
+        //Assert
+        assertThat(productService.deleteProduct(1L)).isEqualTo("product deleted");
+    }
+
+    @Test
+    @DisplayName("GET product by id")
     void fetchProductById() throws ProductNotFoundException {
         //Arrange
         //Act
@@ -135,16 +140,6 @@ class ProductServiceTest {
         //Assert
         ProductDto emptyProductDto = productService.fetchProductById(1L);
         assertNotEquals(emptyProductDto, productDto);
-    }
-
-    @Test
-    @DisplayName("should delete product")
-    void deleteProduct() throws ProductNotFoundException {
-        //Arrange
-        //Act
-        when(productRepository.findById(1L)).thenReturn(Optional.ofNullable(product));
-        //Assert
-        assertThat(productService.deleteProduct(1L)).isEqualTo("product deleted");
     }
 
     @Test
